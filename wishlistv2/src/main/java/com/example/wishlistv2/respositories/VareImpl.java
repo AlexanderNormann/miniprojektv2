@@ -29,8 +29,8 @@ public class VareImpl implements VareRepository{
       return vare;
 
     }catch(SQLException er){
-      System.out.println("Fejl, du har ikke intastet korrekte oplysninger");
+      throw new LoginSampleException(er.getMessage());
     }
-    return null;
+
   }
 }

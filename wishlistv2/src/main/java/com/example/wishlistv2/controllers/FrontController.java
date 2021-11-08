@@ -9,10 +9,7 @@ import com.example.wishlistv2.domain.servives.Services;
 import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
 import com.example.wishlistv2.respositories.VareImpl;
-import org.apache.juli.logging.Log;
-import org.springframework.core.BridgeMethodResolver;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +33,7 @@ private Services services = new Services(new VareImpl());
 
     request.setAttribute("bruger", bruger, WebRequest.SCOPE_SESSION);
 
-    return "/";
+    return "addwish";
   }
 
  /* @GetMapping("/opret")
@@ -75,13 +72,13 @@ private Services services = new Services(new VareImpl());
   @PostMapping("/loginBruger")
   public String loginBruger(@ModelAttribute ("Bruger") Bruger bruger) throws LoginSampleException{
     loginService.login(bruger.getEmail(), bruger.getKodeord());
-    return "wishsite";
+    return "wishlistoverview";
   }
 
   @PostMapping("/gemVare")
   public String gemVare(@ModelAttribute("Vare") Vare vare) throws LoginSampleException {
     services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
-    return "wishsite";
+    return "addwish";
   }
 /*
   @PostMapping("/visOpretBruger")
@@ -117,7 +114,7 @@ return "opretbruger";
 
   @GetMapping ("/wishsite")
   public String wishsite(){
-    return "wishsite";
+    return "addwish";
   }
 
   /*
