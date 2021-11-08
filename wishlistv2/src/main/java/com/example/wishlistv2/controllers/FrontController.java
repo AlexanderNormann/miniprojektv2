@@ -10,6 +10,7 @@ import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
 import com.example.wishlistv2.respositories.VareImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,31 +37,6 @@ private Services services = new Services(new VareImpl());
     return "addwish";
   }
 
- /* @GetMapping("/opret")
-  public String opret(WebRequest request) throws LoginSampleException{
-    String fornavn = request.getParameter("fornavn");
-    String efternavn = request.getParameter("efternavn");
-    String email = request.getParameter("email");
-    String kodeord = request.getParameter("kodeord");
-    String gentagkodeord = request.getParameter("gentagkodeord");
-
-
-    if (kodeord.equals(gentagkodeord)){
-      Bruger bruger = loginService.opretBruger(fornavn, efternavn, email, kodeord);
-      request.setAttribute("bruger", bruger, WebRequest.SCOPE_SESSION);
-
-    return "opretbruger";
-   } else {
-      throw  new LoginSampleException("koderne stemmer ikke overens");
-
-   }
-
-  }
-
-  */
-
-
-
   @PostMapping("/gemBruger")
   public String gemBruger(@ModelAttribute("Bruger") Bruger bruger) throws LoginSampleException {
     //System.out.println(bruger.getEfternavn());
@@ -77,28 +53,19 @@ private Services services = new Services(new VareImpl());
 
   @PostMapping("/gemVare")
   public String gemVare(@ModelAttribute("Vare") Vare vare) throws LoginSampleException {
-    services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
-    return "addwish";
+    //services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
+    services.gemVare(vare);
+    System.out.println("HEJ");
+    return "wishlistoverview";
   }
-/*
-  @PostMapping("/visOpretBruger")
-  public String visOpretBruger(Model model){
-    Bruger bruger = new Bruger();
-    model.addAttribute("bruger", bruger);
-    return "null";
- }
- */
 
-/*
-  @GetMapping("opret1")
-  public String opret1(@ModelAttribute ("bruger") Bruger bruger) throws LoginSampleException {
-  loginService.opretBruger1(bruger);
+  @GetMapping("/opretVare")
+    public String opretVare(Model model){
+     Vare vare = new Vare();
+     model.addAttribute("Vare", vare);
+     return "addwish";
+    }
 
-return "opretbruger";
-
-
-  }
-*/
   @GetMapping("opret2")
   public String opret2 (@ModelAttribute ("bruger") Bruger bruger) throws LoginSampleException {
     //System.out.println(bruger.getEfternavn());
@@ -112,24 +79,8 @@ return "opretbruger";
   }
 
 
-  @GetMapping ("/wishsite")
+  @GetMapping ("/addwish")
   public String wishsite(){
     return "addwish";
   }
-
-  /*
-  @PostMapping("opret3")
-  public String opret3 (@ModelAttribute("bruger") Bruger bruger) throws LoginSampleException{
-    loginService.opretBruger3(bruger);
-    return "redirect:/";
-  }
-
-  @GetMapping("opret4")
-  public String opret4(Model model){
-  Bruger bruger = new Bruger();
-  model.addAttribute("bruger", bruger);
-  return "opretbruger";
-  }
-  */
-
 }

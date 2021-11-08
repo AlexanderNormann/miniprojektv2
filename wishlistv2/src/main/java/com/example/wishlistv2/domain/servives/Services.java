@@ -19,6 +19,10 @@ public Services(VareImpl vareRepository){
     return vareRepository.tilføjVare(vare);
   }
 
+  public Vare gemVare(Vare vare) throws LoginSampleException {
+    return vareRepository.tilføjVare(vare);
+  }
+
   /*
   public void gem(Bruger bruger){
     brugerRepository.gem(bruger);

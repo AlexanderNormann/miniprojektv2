@@ -83,4 +83,8 @@ public class Vare {
     this.URL = URL;
     this.pris = pris;
   }
+
+  public Vare(){
+
+  }
 }
