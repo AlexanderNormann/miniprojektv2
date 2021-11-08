@@ -36,7 +36,7 @@ private Services services = new Services(new VareImpl());
 
     request.setAttribute("bruger", bruger, WebRequest.SCOPE_SESSION);
 
-    return null;
+    return "/";
   }
 
  /* @GetMapping("/opret")
@@ -81,7 +81,7 @@ private Services services = new Services(new VareImpl());
   @PostMapping("/gemVare")
   public String gemVare(@ModelAttribute("Vare") Vare vare) throws LoginSampleException {
     services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
-    return "redirect:/";
+    return "wishsite";
   }
 /*
   @PostMapping("/visOpretBruger")
