@@ -5,8 +5,10 @@ import com.example.wishlistv2.domain.model.Bruger;
 import com.example.wishlistv2.domain.model.Vare;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import com.example.wishlistv2.domain.servives.LoginService;
+import com.example.wishlistv2.domain.servives.Services;
 import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
+import com.example.wishlistv2.respositories.VareImpl;
 import org.apache.juli.logging.Log;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.context.request.WebRequest;
 public class FrontController {
 
 private LoginService loginService = new LoginService(new BrugerRepositoryImpl());
+private Services services = new Services(new VareImpl());
 
   @GetMapping("/")
   public String index() { return "index"; }
@@ -76,9 +79,9 @@ private LoginService loginService = new LoginService(new BrugerRepositoryImpl())
   }
 
   @PostMapping("/gemVare")
-  public String gemVare(@ModelAttribute("Vare") Vare vare){
-
-
+  public String gemVare(@ModelAttribute("Vare") Vare vare) throws LoginSampleException {
+    services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
+    return null;
   }
 /*
   @PostMapping("/visOpretBruger")
@@ -111,6 +114,11 @@ return "opretbruger";
     return "login";
   }
 
+
+  @GetMapping ("/wishsite")
+  public String wishsite(){
+    return "wishsite";
+  }
 
   /*
   @PostMapping("opret3")

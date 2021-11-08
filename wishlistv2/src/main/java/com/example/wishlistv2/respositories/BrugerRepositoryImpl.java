@@ -26,7 +26,7 @@ public class BrugerRepositoryImpl implements BrugerRepository{
       preparedStatement.setString(2, kodeord);
       ResultSet resultSet = preparedStatement.executeQuery();
       if (resultSet.next()){
-        int id = resultSet.getInt("id");
+        int id = resultSet.getInt("brugerid");
         Bruger bruger = new Bruger(email, kodeord);
         bruger.setId(id);
         return bruger;
