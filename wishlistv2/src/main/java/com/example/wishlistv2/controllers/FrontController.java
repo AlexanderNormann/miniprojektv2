@@ -2,6 +2,7 @@ package com.example.wishlistv2.controllers;
 
 
 import com.example.wishlistv2.domain.model.Bruger;
+import com.example.wishlistv2.domain.model.Vare;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import com.example.wishlistv2.domain.servives.LoginService;
 import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
@@ -72,6 +73,12 @@ private LoginService loginService = new LoginService(new BrugerRepositoryImpl())
   public String loginBruger(@ModelAttribute ("Bruger") Bruger bruger) throws LoginSampleException{
     loginService.login(bruger.getEmail(), bruger.getKodeord());
     return "wishsite";
+  }
+
+  @PostMapping("/gemVare")
+  public String gemVare(@ModelAttribute("Vare") Vare vare){
+
+
   }
 /*
   @PostMapping("/visOpretBruger")

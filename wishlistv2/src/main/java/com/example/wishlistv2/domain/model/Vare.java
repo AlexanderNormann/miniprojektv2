@@ -6,6 +6,8 @@ public class Vare {
   private String størrelse;
   private String beskrivelse;
   private String farve;
+  private int pris;
+  private String URL;
   private int id;
 
   public String getNavn() {
@@ -48,14 +50,37 @@ public class Vare {
     this.id = id;
   }
 
-  public Vare(String navn, String størrelse, String beskrivelse, String farve, int id) {
+  public int getPris() {
+    return pris;
+  }
+
+  public void setPris(int pris) {
+    this.pris = pris;
+  }
+
+  public String getURL() {
+    return URL;
+  }
+
+  public void setURL(String URL) {
+    this.URL = URL;
+  }
+
+  public Vare(String navn, String størrelse, String beskrivelse, String farve, int id, int pris) {
     this.navn = navn;
     this.størrelse = størrelse;
     this.beskrivelse = beskrivelse;
     this.farve = farve;
+    this.pris = pris;
     this.id = id;
+  }
 
-
-
+  public Vare(String navn, String størrelse, String beskrivelse, String farve, int pris, String URL) {
+    this.navn = navn;
+    this.størrelse = størrelse;
+    this.beskrivelse = beskrivelse;
+    this.farve = farve;
+    this.URL = URL;
+    this.pris = pris;
   }
 }
