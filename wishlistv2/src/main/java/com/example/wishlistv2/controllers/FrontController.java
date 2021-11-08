@@ -81,7 +81,7 @@ private Services services = new Services(new VareImpl());
   @PostMapping("/gemVare")
   public String gemVare(@ModelAttribute("Vare") Vare vare) throws LoginSampleException {
     services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
-    return null;
+    return "redirect:/";
   }
 /*
   @PostMapping("/visOpretBruger")
