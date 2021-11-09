@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">>
 <head>
     <meta charset="UTF-8">
     <title>This is your wishlists</title>
@@ -8,9 +8,9 @@
 
 
     <tr>
-        <p th:each="wishlist : ${wishlist}">
-            <span th:text="${wishlist.navn}"></span>
-            <span th:text="${wishlist.beskrivelse}"></span>
+        <p th:each="Wishlist : ${wishlist}">
+            <span th:text="${Wishlist.navn}"></span>
+            <span th:text="${Wishlist.beskrivelse}"></span>
 
 
         </p>
@@ -19,6 +19,7 @@
         <th> </th>
 
     </tr>
+
 </head>
 <body>
 
