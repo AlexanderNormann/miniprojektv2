@@ -118,6 +118,11 @@ private Services services;
     return "wishlist";
   }
 
+  @GetMapping("/overview")
+  public String  wlo (){
+    return "wishlistoverview";
+  }
+
 
 
 
