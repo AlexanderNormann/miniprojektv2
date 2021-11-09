@@ -3,11 +3,13 @@ package com.example.wishlistv2.respositories;
 
 import com.example.wishlistv2.domain.model.Bruger;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Repository
 public class BrugerRepositoryImpl implements BrugerRepository{
 
   private BrugerRepository brugerRepository;

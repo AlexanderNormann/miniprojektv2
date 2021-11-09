@@ -10,9 +10,5 @@ public interface BrugerRepository {
 
   public  Bruger opretBruger(Bruger bruger) throws LoginSampleException;
 
- // void gem(Bruger bruger);
 
- // Bruger opret1(Bruger bruger);
-
-//  public Bruger opretBruger1(Bruger bruger) throws LoginSampleException;
 }

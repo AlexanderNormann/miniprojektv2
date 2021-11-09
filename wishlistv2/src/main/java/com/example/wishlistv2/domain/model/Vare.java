@@ -3,7 +3,7 @@ package com.example.wishlistv2.domain.model;
 public class Vare {
 
   private String navn;
-  private String størrelse;
+  private String storrelse;
   private String beskrivelse;
   private String farve;
   private int pris;
@@ -18,12 +18,12 @@ public class Vare {
     this.navn = navn;
   }
 
-  public String getStørrelse() {
-    return størrelse;
+  public String getStorrelse() {
+    return storrelse;
   }
 
-  public void setStørrelse(String størrelse) {
-    this.størrelse = størrelse;
+  public void setStorrelse(String storrelse) {
+    this.storrelse = storrelse;
   }
 
   public String getBeskrivelse() {
@@ -68,7 +68,7 @@ public class Vare {
 
   public Vare(String navn, String størrelse, String beskrivelse, String farve, int id, int pris) {
     this.navn = navn;
-    this.størrelse = størrelse;
+    this.storrelse = størrelse;
     this.beskrivelse = beskrivelse;
     this.farve = farve;
     this.pris = pris;
@@ -77,7 +77,7 @@ public class Vare {
 
   public Vare(String navn, String størrelse, String beskrivelse, String farve, int pris, String URL) {
     this.navn = navn;
-    this.størrelse = størrelse;
+    this.storrelse = størrelse;
     this.beskrivelse = beskrivelse;
     this.farve = farve;
     this.URL = URL;

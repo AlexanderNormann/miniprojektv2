@@ -3,12 +3,15 @@ package com.example.wishlistv2.controllers;
 
 import com.example.wishlistv2.domain.model.Bruger;
 import com.example.wishlistv2.domain.model.Vare;
+import com.example.wishlistv2.domain.model.Wishlist;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import com.example.wishlistv2.domain.servives.LoginService;
 import com.example.wishlistv2.domain.servives.Services;
 import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
 import com.example.wishlistv2.respositories.VareImpl;
+import com.example.wishlistv2.respositories.VareRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,26 +19,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.List;
+
 @Controller
 public class FrontController {
 
-private LoginService loginService = new LoginService(new BrugerRepositoryImpl());
-private Services services = new Services(new VareImpl());
+private LoginService loginService;
+private Services services;
+
+  public FrontController(LoginService loginService, Services services) {
+    this.loginService = loginService;
+    this.services = services;
+  }
 
   @GetMapping("/")
   public String index() { return "index"; }
 
-  @PostMapping("/login")
-  public String loginBruger(WebRequest request) throws LoginSampleException {
-    String email = request.getParameter("email");
-    String kodeord = request.getParameter("kodeord");
 
-    Bruger bruger = loginService.login(email, kodeord);
-
-    request.setAttribute("bruger", bruger, WebRequest.SCOPE_SESSION);
-
-    return "addwish";
-  }
 
   @PostMapping("/gemBruger")
   public String gemBruger(@ModelAttribute("Bruger") Bruger bruger) throws LoginSampleException {
@@ -83,4 +83,36 @@ private Services services = new Services(new VareImpl());
   public String wishsite(){
     return "addwish";
   }
+
+
+
+  @GetMapping("/visvare")
+  public String visliste (Model model){
+    model.addAttribute("vareliste", services.hentAlleVarer());
+    return "vareliste";
+  }
+
+  @GetMapping("/wishlist")
+  public String visWishlists(){
+    return "wishlist";
+  }
+
+  @GetMapping("/opretwishlist")
+  public String opretwishlist(Model model){
+    Wishlist wishlist = new Wishlist();
+    model.addAttribute("wishlist", wishlist);
+    return "wishlistoverview";
+  }
+
+  @PostMapping("/gemWishlist")
+
+  public String gemWishlist{
+    return null;
+  }
+
+
+
+
 }
+
+
