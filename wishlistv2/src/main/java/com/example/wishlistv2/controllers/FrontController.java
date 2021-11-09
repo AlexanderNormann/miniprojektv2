@@ -11,6 +11,7 @@ import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
 import com.example.wishlistv2.respositories.VareImpl;
 import com.example.wishlistv2.respositories.VareRepository;
+import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,13 +102,13 @@ private Services services;
   public String opretwishlist(Model model){
     Wishlist wishlist = new Wishlist();
     model.addAttribute("wishlist", wishlist);
-    return "wishlistoverview";
+    return "opretwishlist";
   }
 
   @PostMapping("/gemWishlist")
-
-  public String gemWishlist{
-    return null;
+  public String gemWishlist (@ModelAttribute("Wishlist") Wishlist wishlist) throws LoginSampleException {
+    services.gemWishlist(wishlist);
+    return "wishlistoverview";
   }
 
 
