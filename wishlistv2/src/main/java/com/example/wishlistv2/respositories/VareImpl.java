@@ -77,10 +77,10 @@ public class VareImpl implements VareRepository {
       while (resultSet.next()){
         Vare vare = new Vare();
         vare.setNavn(resultSet.getString("varenavn"));
-        vare.setNavn(resultSet.getString("varestr"));
-        vare.setNavn(resultSet.getString("beskrivelse"));
-        vare.setNavn(resultSet.getString("farve"));
-        vare.setNavn(resultSet.getString("url"));
+        vare.setStorrelse(resultSet.getString("varestr"));
+        vare.setBeskrivelse(resultSet.getString("beskrivelse"));
+        vare.setFarve(resultSet.getString("farve"));
+        vare.setURL(resultSet.getString("url"));
         vare.setPris((Integer.parseInt(resultSet.getString("pris"))));
         vareliste.add(vare);
       }
@@ -102,8 +102,8 @@ public class VareImpl implements VareRepository {
 
       while (resultSet.next()){
         Wishlist wishlist = new Wishlist();
-        wishlist.getNavn();
-        wishlist.getBeskrivelse();
+        wishlist.setNavn(resultSet.getString("navn"));
+        wishlist.setBeskrivelse(resultSet.getString("beskrivelse"));
         listofwishes.add(wishlist);
       }
 

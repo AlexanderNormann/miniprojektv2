@@ -8,9 +8,9 @@
 
 
     <tr>
-        <p th:each="Wishlist : ${wishlist}">
-            <span th:text="${wishlist}"></span>
-            <span th:text="${wishlist}"></span>
+        <p th:each="wishlist : ${wishlist}">
+            <span th:text="${wishlist.navn}"></span>
+            <span th:text="${wishlist.beskrivelse}"></span>
 
 
         </p>
