@@ -26,7 +26,7 @@ public class Services implements VareRepository {
   }
 
   public Vare gemVare(Vare vare) throws LoginSampleException {
-    return vareRepository.tilføjVare(vare);
+    return vareimpl.tilføjVare(vare);
   }
 
   @Override
