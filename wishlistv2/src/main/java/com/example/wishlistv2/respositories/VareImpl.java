@@ -92,6 +92,26 @@ public class VareImpl implements VareRepository {
     return vareliste;
 
   }
+  public ArrayList<Wishlist> hentWishlist(){
+    ArrayList<Wishlist> listofwishes = new ArrayList<>();
+    try {
+      Connection connection = DBManager.getConnection();
+      String SQL = "select * from wishlist.wishlist";
+      PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()){
+        Wishlist wishlist = new Wishlist();
+        wishlist.getNavn();
+        wishlist.getBeskrivelse();
+        listofwishes.add(wishlist);
+      }
+
+    } catch (SQLException throwables) {
+      throwables.printStackTrace();
+    }
+    return listofwishes;
+  }
 
 
 

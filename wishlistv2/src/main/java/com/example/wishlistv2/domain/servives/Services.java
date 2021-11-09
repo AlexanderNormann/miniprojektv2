@@ -44,7 +44,11 @@ public class Services implements VareRepository {
   public Wishlist tilføjWishListe(Wishlist wishlist) throws LoginSampleException {
     return null;
   }
+
   public Wishlist gemWishlist(Wishlist wishlist) throws LoginSampleException{
     return vareimpl.tilføjWishListe(wishlist);
+  }
+  public ArrayList<Wishlist> hentallelister(){
+    return vareimpl.hentWishlist();
   }
 }

@@ -111,6 +111,14 @@ private Services services;
     return "wishlistoverview";
   }
 
+  @GetMapping("/viswishlists")
+  public String vislists(Model model){
+    model.addAttribute("wishlist", services.hentallelister());
+    System.out.println("test");
+    return "wishlist";
+  }
+
+
 
 
 

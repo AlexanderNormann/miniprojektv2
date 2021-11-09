@@ -8,12 +8,13 @@
 
 
     <tr>
-        <th> </th>
+        <p th:each="Wishlist : ${wishlist}">
+            <span th:text="${wishlist}"></span>
+            <span th:text="${wishlist}"></span>
 
-        <th> </th>
 
-        <th> </th>
-        <a th:href="@{/}"> se dine ønskelister </a>
+        </p>
+        <a th:href="@{/}">tilbage til velkomstside</a>
 
         <th> </th>
 
