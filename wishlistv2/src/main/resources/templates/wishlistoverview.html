@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>This is your wishlist</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 
     <h1>This is your wishlist</h1>
 
@@ -11,14 +14,17 @@
         <th> </th>
 
         <th> </th>
-        <a th:href="@{/opretVare}"> tilføj vare til din ønskeliste</a>
+        <a th:href="@{/opretVare}" class="btn btn-primary btn-sm mb-3"> tilføj vare til din ønskeliste</a>
 
         <th> </th>
-        <a th:href="@{/visvare}"> vis vare på liste </a>
+        <a th:href="@{/visvare}" class="btn btn-primary btn-sm mb-3"> vis vare på liste </a>
 
-        <a th:href="@{/viswishlists}"> gå til dine ønskelister</a>
+        <a th:href="@{/viswishlists}" class="btn btn-primary btn-sm mb-3"> gå til dine ønskelister</a>
 
-        <a th:href="@{/opretwishlist}"> opret ønskeliste</a>
+        <a th:href="@{/opretwishlist}" class="btn btn-primary btn-sm mb-3"> opret ønskeliste</a>
+
+        <a th:href="@{/logout}" class="btn btn-primary btn-sm mb-3"> log ud</a>
+
 
 
 

@@ -48,7 +48,7 @@ public class VareImpl implements VareRepository {
   public Wishlist tilføjWishListe(Wishlist wishlist) throws LoginSampleException {
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "insert into wishlist(navn, beskrivelse) values (?,?)";
+      String SQL = "insert into list(navn, beskrivelse) values (?,?)";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, wishlist.getNavn());
       preparedStatement.setString(2, wishlist.getBeskrivelse());
@@ -96,7 +96,7 @@ public class VareImpl implements VareRepository {
     ArrayList<Wishlist> listofwishes = new ArrayList<>();
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select * from wishlist.wishlist";
+      String SQL = "select * from wishlist.list";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       ResultSet resultSet = preparedStatement.executeQuery();
 

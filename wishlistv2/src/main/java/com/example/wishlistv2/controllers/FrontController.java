@@ -11,7 +11,6 @@ import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
 import com.example.wishlistv2.respositories.VareImpl;
 import com.example.wishlistv2.respositories.VareRepository;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -46,10 +46,22 @@ private Services services;
     return "redirect:/";
   }
 
+
   @PostMapping("/loginBruger")
-  public String loginBruger(@ModelAttribute ("Bruger") Bruger bruger) throws LoginSampleException{
+  public String loginBruger(@ModelAttribute ("Bruger") Bruger bruger, HttpSession httpSession) throws LoginSampleException{
     loginService.login(bruger.getEmail(), bruger.getKodeord());
+    httpSession.setAttribute("bruger", bruger);
     return "wishlistoverview";
+  }
+
+
+
+  @GetMapping("/logout")
+  public String logout(HttpSession httpSession){
+    if(httpSession != null){
+      httpSession.invalidate();
+    }
+    return "index";
   }
 
   @PostMapping("/gemVare")
@@ -75,9 +87,12 @@ private Services services;
   }
 
   @GetMapping("/login1")
-  public String login1 (@ModelAttribute("bruger") Bruger bruger) throws LoginSampleException{
+  public String login1 (@ModelAttribute("bruger") Bruger bruger, HttpSession hs) throws LoginSampleException{
+    hs.setAttribute("bruger", bruger);
     return "login";
   }
+
+
 
 
   @GetMapping ("/addwish")
@@ -105,12 +120,6 @@ private Services services;
     return "opretwishlist";
   }
 
-  @PostMapping("/gemWishlist")
-  public String gemWishlist (@ModelAttribute("Wishlist") Wishlist wishlist) throws LoginSampleException {
-    services.gemWishlist(wishlist);
-    return "wishlistoverview";
-  }
-
   @GetMapping("/viswishlists")
   public String vislists(Model model){
     model.addAttribute("wishlist", services.hentallelister());
@@ -121,6 +130,13 @@ private Services services;
   @GetMapping("/overview")
   public String  wlo (){
     return "wishlistoverview";
+  }
+
+  @PostMapping("/gemWishlist")
+
+  public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist) throws LoginSampleException{
+    services.gemWishlist(wishlist);
+    return"wishlistoverview";
   }
 
 
