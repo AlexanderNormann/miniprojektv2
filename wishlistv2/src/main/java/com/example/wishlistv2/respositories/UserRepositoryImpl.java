@@ -1,7 +1,7 @@
 package com.example.wishlistv2.respositories;
 
 
-import com.example.wishlistv2.domain.model.Bruger;
+import com.example.wishlistv2.domain.model.User;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import org.springframework.stereotype.Repository;
 
@@ -10,28 +10,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @Repository
-public class BrugerRepositoryImpl implements BrugerRepository{
-
-  private BrugerRepository brugerRepository;
-
-  private ArrayList<Bruger> listeAfBruger = new ArrayList<Bruger>(Arrays.asList(
-      new Bruger("alex@kea.dk", "1234" )
-  ));
+public class UserRepositoryImpl implements UserRepository {
 
   @Override
-  public Bruger login(String email, String kodeord) throws LoginSampleException {
+  public User login(String email, String password) throws LoginSampleException {
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select brugerid from brugere " +  "where email = ? and kodeord = ?";
+      String SQL = "select userid from users " +  "where email = ? and password = ?";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       preparedStatement.setString(1, email);
-      preparedStatement.setString(2, kodeord);
+      preparedStatement.setString(2, password);
       ResultSet resultSet = preparedStatement.executeQuery();
       if (resultSet.next()){
-        int id = resultSet.getInt("brugerid");
-        Bruger bruger = new Bruger(email, kodeord);
-        bruger.setId(id);
-        return bruger;
+        int id = resultSet.getInt("userid");
+        User user = new User(email, password);
+        user.setId(id);
+        return user;
       } else {
         throw new LoginSampleException("kunne ikke ikke login");
       }
@@ -43,21 +37,21 @@ public class BrugerRepositoryImpl implements BrugerRepository{
   }
 
   @Override
-  public Bruger opretBruger(Bruger bruger) throws LoginSampleException {
+  public User createUser(User user) throws LoginSampleException {
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "insert into Brugere (fornavn, efternavn, email, kodeord) values (?, ?, ?, ?) ";
+      String SQL = "insert into Users (firstname, lastname, email, password) values (?, ?, ?, ?) ";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-      preparedStatement.setString(1, bruger.getFornavn());
-      preparedStatement.setString(2, bruger.getEfternavn());
-      preparedStatement.setString(3, bruger.getEmail());
-      preparedStatement.setString(4, bruger.getKodeord());
+      preparedStatement.setString(1, user.getFirstname());
+      preparedStatement.setString(2, user.getLastname());
+      preparedStatement.setString(3, user.getEmail());
+      preparedStatement.setString(4, user.getPassword());
       preparedStatement.executeUpdate();
       ResultSet resultSet = preparedStatement.getGeneratedKeys();
       resultSet.next();
       int id = resultSet.getInt(1);
-      bruger.setId(id);
-      return bruger;
+      user.setId(id);
+      return user;
 
     } catch (SQLException er) {
       throw new LoginSampleException(er.getMessage());

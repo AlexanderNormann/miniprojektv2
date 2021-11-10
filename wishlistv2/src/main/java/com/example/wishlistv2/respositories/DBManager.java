@@ -16,7 +16,7 @@ public class DBManager {
 
   public static Connection getConnection(){
     if (connection != null) return connection;
-    try (InputStream input = new FileInputStream("/Users/nicklashansen/Desktop/ØnskelisteMiniProjekt/AlexVersion3/miniprojektv2/wishlistv2/src/main/resources/application.properties")) {
+    try (InputStream input = new FileInputStream("D:\\Users\\Jonathan\\IdeaProjects\\Wishlist\\miniprojektv2\\wishlistv2\\src\\main\\resources\\application.properties")) {
       Properties properties = new Properties();
       properties.load(input);
       url = properties.getProperty("url");

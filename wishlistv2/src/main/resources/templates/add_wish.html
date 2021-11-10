@@ -12,22 +12,22 @@
     <hr>
     <h2>Indtast Ønske</h2>
 
-    <form action="#" th:action="@{/gemVare}" th:object="${Vare}"
+    <form action="#" th:action="@{/saveProduct}" th:object="${Product}"
           method="POST">
 
-        <input type="text" th:field="*{navn}"
+        <input type="text" th:field="*{name}"
                placeholder="Navn" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{storrelse}"
+        <input type="text" th:field="*{size}"
                placeholder="Størrelse" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{beskrivelse}"
+        <input type="text" th:field="*{description}"
                placeholder="Beskrivelse" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{farve}"
+        <input type="text" th:field="*{color}"
                placeholder="Farve" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{pris}"
+        <input type="text" th:field="*{price}"
                placeholder="Pris" class="form-control mb-4 col-4">
 
         <input type="text" th:field="*{URL}"

@@ -12,13 +12,13 @@
     <hr>
     <h2>Indtast Oplysninger</h2>
 
-    <form action="#" th:action="@{/loginBruger}" th:object="${bruger}"
+    <form action="#" th:action="@{/loginBruger}" th:object="${User}"
           method="POST">
 
         <input type="text" th:field="*{email}"
                placeholder="Email" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{kodeord}"
+        <input type="password" th:field="*{password}"
                placeholder="Kodeord" class="form-control mb-4 col-4">
 
 

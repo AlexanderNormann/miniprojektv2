@@ -1,54 +1,53 @@
 package com.example.wishlistv2.domain.servives;
 
-import com.example.wishlistv2.domain.model.Bruger;
-import com.example.wishlistv2.domain.model.Vare;
+import com.example.wishlistv2.domain.model.Products;
 import com.example.wishlistv2.domain.model.Wishlist;
-import com.example.wishlistv2.respositories.BrugerRepository;
-import com.example.wishlistv2.respositories.VareImpl;
-import com.example.wishlistv2.respositories.VareRepository;
+import com.example.wishlistv2.respositories.UserRepository;
+import com.example.wishlistv2.respositories.ProductImpl;
+import com.example.wishlistv2.respositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
+
 @Service
-public class Services implements VareRepository {
-  private BrugerRepository brugerRepository;
-  private VareRepository vareRepository;
-  private VareImpl vareimpl;
+public class Services implements ProductRepository {
+  private UserRepository userRepository; //Den her bliver ikke brugt btw
+  private ProductRepository productRepository;
+  private ProductImpl productimpl;
 
   public Services(){
-    this.vareimpl = new VareImpl();
+    this.productimpl = new ProductImpl();
   }
 
-  public Vare opretVare(String navn, String størrelse, String beskrivelse, String farve, int pris, String URL) throws LoginSampleException {
-    Vare vare = new Vare(navn, størrelse, beskrivelse, farve, pris, URL);
-    return vareRepository.tilføjVare(vare);
+  public Products createProduct(String name, String size, String description, String color, int price, String URL) throws LoginSampleException {
+    Products products = new Products(name, size, description, color, price, URL);
+    return productRepository.addProduct(products); //CreateProduct bliver ikke brugt btw
   }
 
-  public Vare gemVare(Vare vare) throws LoginSampleException {
-    return vareimpl.tilføjVare(vare);
+  public Products saveProduct(Products products) throws LoginSampleException {
+    return productimpl.addProduct(products);
   }
 
   @Override
-  public Vare tilføjVare(Vare vare) throws LoginSampleException {
+  public Products addProduct(Products products) throws LoginSampleException {
     return null;
   }
 
-  public ArrayList<Vare> hentAlleVarer() {
-    return vareimpl.hentliste();
+  public ArrayList<Products> loadProducts() {
+    return productimpl.loadList(); //Vejledning til doug (Class diagram)
   }
 
 
 
   @Override
-  public Wishlist tilføjWishListe(Wishlist wishlist) throws LoginSampleException {
+  public Wishlist addToWishlist(Wishlist wishlist) throws LoginSampleException {
     return null;
   }
 
-  public Wishlist gemWishlist(Wishlist wishlist) throws LoginSampleException{
-    return vareimpl.tilføjWishListe(wishlist);
+  public Wishlist loadWishlist(Wishlist wishlist) throws LoginSampleException{
+    return productimpl.addToWishlist(wishlist);
   }
-  public ArrayList<Wishlist> hentallelister(){
-    return vareimpl.hentWishlist();
+  public ArrayList<Wishlist> loadAllLists(){
+    return productimpl.loadAllLists();
   }
 }

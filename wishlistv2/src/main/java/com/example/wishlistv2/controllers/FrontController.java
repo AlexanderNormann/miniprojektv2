@@ -1,26 +1,20 @@
 package com.example.wishlistv2.controllers;
 
 
-import com.example.wishlistv2.domain.model.Bruger;
-import com.example.wishlistv2.domain.model.Vare;
+import com.example.wishlistv2.domain.model.User;
+import com.example.wishlistv2.domain.model.Products;
 import com.example.wishlistv2.domain.model.Wishlist;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import com.example.wishlistv2.domain.servives.LoginService;
 import com.example.wishlistv2.domain.servives.Services;
-import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
 
-import com.example.wishlistv2.respositories.VareImpl;
-import com.example.wishlistv2.respositories.VareRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 public class FrontController {
@@ -38,20 +32,20 @@ private Services services;
 
 
 
-  @PostMapping("/gemBruger")
-  public String gemBruger(@ModelAttribute("Bruger") Bruger bruger) throws LoginSampleException {
+  @PostMapping("/saveUser")
+  public String saveUser(@ModelAttribute("User") User user) throws LoginSampleException {
     //System.out.println(bruger.getEfternavn());
-    loginService.opretBruger(bruger.getFornavn(), bruger.getEfternavn(), bruger.getEmail(), bruger.getKodeord());
+    loginService.createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
     //loginService.gem(bruger);
     return "redirect:/";
   }
 
 
   @PostMapping("/loginBruger")
-  public String loginBruger(@ModelAttribute ("Bruger") Bruger bruger, HttpSession httpSession) throws LoginSampleException{
-    loginService.login(bruger.getEmail(), bruger.getKodeord());
-    httpSession.setAttribute("bruger", bruger);
-    return "wishlistoverview";
+  public String loginBruger(@ModelAttribute ("User") User user, HttpSession httpSession) throws LoginSampleException{
+    loginService.login(user.getEmail(), user.getPassword());
+    httpSession.setAttribute("user", user);
+    return "wishlist_overview";
   }
 
 
@@ -64,31 +58,31 @@ private Services services;
     return "index";
   }
 
-  @PostMapping("/gemVare")
-  public String gemVare(@ModelAttribute("Vare") Vare vare) throws LoginSampleException {
+  @PostMapping("/saveProduct")
+  public String gemVare(@ModelAttribute("Product") Products products) throws LoginSampleException {
     //services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
-    services.gemVare(vare);
+    services.saveProduct(products);
     System.out.println("HEJ");
-    return "wishlistoverview";
+    return "wishlist_overview";
   }
 
-  @GetMapping("/opretVare")
+  @GetMapping("/addProduct")
     public String opretVare(Model model){
-     Vare vare = new Vare();
-     model.addAttribute("Vare", vare);
-     return "addwish";
+     Products products = new Products();
+     model.addAttribute("Product", products);
+     return "add_wish";
     }
 
-  @GetMapping("opret2")
-  public String opret2 (@ModelAttribute ("bruger") Bruger bruger) throws LoginSampleException {
+  @GetMapping("/create")
+  public String create(@ModelAttribute ("User") User user) throws LoginSampleException {
     //System.out.println(bruger.getEfternavn());
     //loginService.opretBruger("x", "x", "5", "x");
-    return "opretbruger";
+    return "create_user";
   }
 
-  @GetMapping("/login1")
-  public String login1 (@ModelAttribute("bruger") Bruger bruger, HttpSession hs) throws LoginSampleException{
-    hs.setAttribute("bruger", bruger);
+  @GetMapping("/login")
+  public String login(@ModelAttribute("User") User user, HttpSession hs) throws LoginSampleException{
+    hs.setAttribute("user", user);
     return "login";
   }
 
@@ -97,15 +91,15 @@ private Services services;
 
   @GetMapping ("/addwish")
   public String wishsite(){
-    return "addwish";
+    return "add_wish";
   }
 
 
 
-  @GetMapping("/visvare")
+  @GetMapping("/showProducts")
   public String visliste (Model model){
-    model.addAttribute("vareliste", services.hentAlleVarer());
-    return "vareliste";
+    model.addAttribute("productlist", services.loadProducts());
+    return "product_list";
   }
 
   @GetMapping("/wishlist")
@@ -113,30 +107,30 @@ private Services services;
     return "wishlist";
   }
 
-  @GetMapping("/opretwishlist")
+  @GetMapping("/createWishlist")
   public String opretwishlist(Model model){
     Wishlist wishlist = new Wishlist();
     model.addAttribute("wishlist", wishlist);
-    return "opretwishlist";
+    return "create_wishlist";
   }
 
-  @GetMapping("/viswishlists")
+  @GetMapping("/showWishlist")
   public String vislists(Model model){
-    model.addAttribute("wishlist", services.hentallelister());
+    model.addAttribute("wishlist", services.loadAllLists());
     System.out.println("test");
     return "wishlist";
   }
 
   @GetMapping("/overview")
   public String  wlo (){
-    return "wishlistoverview";
+    return "wishlist_overview";
   }
 
-  @PostMapping("/gemWishlist")
+  @PostMapping("/saveWishlist")
 
   public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist) throws LoginSampleException{
-    services.gemWishlist(wishlist);
-    return"wishlistoverview";
+    services.loadWishlist(wishlist);
+    return "wishlist_overview";
   }
 
 

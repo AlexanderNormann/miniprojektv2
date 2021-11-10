@@ -3,32 +3,32 @@ package com.example.wishlistv2.domain.model;
 public class Wishlist {
 
 
-  private String navn;
-  private String beskrivelse;
+  private String name;
+  private String description;
   private int id;
 
   public Wishlist() {
   }
 
-  public Wishlist(String navn, String beskrivelse) {
-    this.navn = navn;
-    this.beskrivelse = beskrivelse;
+  public Wishlist(String name, String description) {
+    this.name = name;
+    this.description = description;
   }
 
-  public String getNavn() {
-    return navn;
+  public String getName() {
+    return name;
   }
 
-  public void setNavn(String navn) {
-    this.navn = navn;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getBeskrivelse() {
-    return beskrivelse;
+  public String getDescription() {
+    return description;
   }
 
-  public void setBeskrivelse(String beskrivelse) {
-    this.beskrivelse = beskrivelse;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public int getId() {

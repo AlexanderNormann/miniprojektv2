@@ -1,6 +1,6 @@
 package com.example.wishlistv2.respositories;
 
-import com.example.wishlistv2.domain.model.Vare;
+import com.example.wishlistv2.domain.model.Products;
 import com.example.wishlistv2.domain.model.Wishlist;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,34 +9,31 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
-public class VareImpl implements VareRepository {
+public class ProductImpl implements ProductRepository {
 
   @Autowired
-  public VareImpl() {
+  public ProductImpl() {
   }
 
   @Override
-  public Vare tilføjVare(Vare vare) throws LoginSampleException {
+  public Products addProduct(Products products) throws LoginSampleException {
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "insert into Varer (varenavn, varestr, beskrivelse, farve, pris, URL) values (?, ?, ?, ?, ?, ?)";
+      String SQL = "insert into Product (productname, productsize, description, color, price, URL) values (?, ?, ?, ?, ?, ?)";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-      preparedStatement.setString(1, vare.getNavn());
-      preparedStatement.setString(2, vare.getStorrelse());
-      preparedStatement.setString(3, vare.getBeskrivelse());
-      preparedStatement.setString(4, vare.getFarve());
-      preparedStatement.setInt(5, vare.getPris());
-      preparedStatement.setString(6, vare.getURL());
+      preparedStatement.setString(1, products.getName());
+      preparedStatement.setString(2, products.getSize());
+      preparedStatement.setString(3, products.getDescription());
+      preparedStatement.setString(4, products.getColor());
+      preparedStatement.setInt(5, products.getPrice());
+      preparedStatement.setString(6, products.getURL());
       preparedStatement.executeUpdate();
       ResultSet resultSet = preparedStatement.getGeneratedKeys();
       resultSet.next();
       int id = resultSet.getInt(1);
-      vare.setId(id);
-      return vare;
+      products.setId(id);
+      return products;
 
     } catch (SQLException er) {
       throw new LoginSampleException(er.getMessage());
@@ -45,13 +42,13 @@ public class VareImpl implements VareRepository {
   }
 
   @Override
-  public Wishlist tilføjWishListe(Wishlist wishlist) throws LoginSampleException {
+  public Wishlist addToWishlist(Wishlist wishlist) throws LoginSampleException {
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "insert into list(navn, beskrivelse) values (?,?)";
+      String SQL = "insert into list(name, description) values (?,?)";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-      preparedStatement.setString(1, wishlist.getNavn());
-      preparedStatement.setString(2, wishlist.getBeskrivelse());
+      preparedStatement.setString(1, wishlist.getName());
+      preparedStatement.setString(2, wishlist.getDescription());
       preparedStatement.executeUpdate();
       ResultSet resultSet = preparedStatement.getGeneratedKeys();
       resultSet.next();
@@ -65,24 +62,24 @@ public class VareImpl implements VareRepository {
   }
 
 
-  public ArrayList<Vare> hentliste (){
-    ArrayList<Vare> vareliste = new ArrayList<>();
+  public ArrayList<Products> loadList(){
+    ArrayList<Products> vareliste = new ArrayList<>();
 
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select * from wishlist.varer";
+      String SQL = "select * from wishlist.product";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()){
-        Vare vare = new Vare();
-        vare.setNavn(resultSet.getString("varenavn"));
-        vare.setStorrelse(resultSet.getString("varestr"));
-        vare.setBeskrivelse(resultSet.getString("beskrivelse"));
-        vare.setFarve(resultSet.getString("farve"));
-        vare.setURL(resultSet.getString("url"));
-        vare.setPris((Integer.parseInt(resultSet.getString("pris"))));
-        vareliste.add(vare);
+        Products products = new Products();
+        products.setName(resultSet.getString("productname"));
+        products.setSize(resultSet.getString("productsize"));
+        products.setDescription(resultSet.getString("description"));
+        products.setColor(resultSet.getString("color"));
+        products.setURL(resultSet.getString("url"));
+        products.setPrice((Integer.parseInt(resultSet.getString("price"))));
+        vareliste.add(products);
       }
 
 
@@ -92,7 +89,7 @@ public class VareImpl implements VareRepository {
     return vareliste;
 
   }
-  public ArrayList<Wishlist> hentWishlist(){
+  public ArrayList<Wishlist> loadAllLists(){
     ArrayList<Wishlist> listofwishes = new ArrayList<>();
     try {
       Connection connection = DBManager.getConnection();
@@ -102,8 +99,8 @@ public class VareImpl implements VareRepository {
 
       while (resultSet.next()){
         Wishlist wishlist = new Wishlist();
-        wishlist.setNavn(resultSet.getString("navn"));
-        wishlist.setBeskrivelse(resultSet.getString("beskrivelse"));
+        wishlist.setName(resultSet.getString("name"));
+        wishlist.setDescription(resultSet.getString("description"));
         listofwishes.add(wishlist);
       }
 

@@ -12,13 +12,13 @@
     <hr>
     <h2>Indtast Oplysninger</h2>
 
-    <form action="#" th:action="@{/gemWishlist}" th:object="${wishlist}"
+    <form action="#" th:action="@{/saveWishlist}" th:object="${wishlist}"
           method="POST">
 
-        <input type="text" th:field="*{navn}"
+        <input type="text" th:field="*{name}"
                placeholder="Navn" class="form-control mb-4 col-4">
 
-        <input type="text" th:field="*{beskrivelse}"
+        <input type="text" th:field="*{description}"
                placeholder="Beskrivelse" class="form-control mb-4 col-4">
 
         <button type="submit" class="btn btn-info col-2"> Gem ønskeliste </button>

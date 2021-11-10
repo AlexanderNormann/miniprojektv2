@@ -1,28 +1,28 @@
 package com.example.wishlistv2.domain.servives;
 
 
-import com.example.wishlistv2.domain.model.Bruger;
-import com.example.wishlistv2.respositories.BrugerRepository;
-import com.example.wishlistv2.respositories.BrugerRepositoryImpl;
+import com.example.wishlistv2.domain.model.User;
+import com.example.wishlistv2.respositories.UserRepository;
+import com.example.wishlistv2.respositories.UserRepositoryImpl;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
 
-  private BrugerRepository brugerRepository;
+  private UserRepository userRepository;
 
-  public LoginService(BrugerRepositoryImpl brugerRepository) {
-    this.brugerRepository = brugerRepository;
+  public LoginService(UserRepositoryImpl userRepository) {
+    this.userRepository = userRepository;
 
   }
 
-  public Bruger login(String email, String kodeord) throws LoginSampleException{
-    return brugerRepository.login(email, kodeord);
+  public User login(String email, String password) throws LoginSampleException{
+    return userRepository.login(email, password);
   }
   
-  public Bruger opretBruger (String fornavn, String efternavn, String email, String kodeord) throws LoginSampleException{
-    Bruger bruger = new Bruger(fornavn, efternavn, email, kodeord);
+  public User createUser(String firstname, String lastname, String email, String password) throws LoginSampleException{
+    User user = new User(firstname, lastname, email, password);
 
-    return brugerRepository.opretBruger(bruger);
+    return userRepository.createUser(user);
   }
 }

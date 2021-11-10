@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vare liste</title>
+    <link rel="stylesheet" type="text/css" href="../book.css">
+</head>
+<body>
+
+
+<p th:each="Products : ${productlist}">
+    <span th:text="${Products.name}"></span>
+    <span th:text="${Products.size}"></span>
+    <span th:text="${Products.description}"></span>
+    <span th:text="${Products.color}"></span>
+    <span th:text="${Products.price}"></span>
+    <span th:text="${Products.URL}"></span>
+
+</p>
+
+
+<a th:href="@{/overview}">tilbage til velkomstside </a>
+</body>
+</html>
