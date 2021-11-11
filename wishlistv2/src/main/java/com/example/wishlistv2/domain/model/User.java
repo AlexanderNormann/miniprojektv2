@@ -12,6 +12,7 @@ public class User {
     this.lastname = lastname;
     this.email = email;
     this.password = password;
+    //this.id = id;
   }
 
   public User(String email, String password) {
@@ -58,5 +59,9 @@ public class User {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public int getId() {
+    return id;
   }
 }

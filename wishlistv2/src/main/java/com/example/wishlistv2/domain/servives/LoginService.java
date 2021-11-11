@@ -17,6 +17,7 @@ public class LoginService {
   }
 
   public User login(String email, String password) throws LoginSampleException{
+
     return userRepository.login(email, password);
   }
   

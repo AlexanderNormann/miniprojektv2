@@ -43,8 +43,8 @@ private Services services;
 
   @PostMapping("/loginBruger")
   public String loginBruger(@ModelAttribute ("User") User user, HttpSession httpSession) throws LoginSampleException{
-    loginService.login(user.getEmail(), user.getPassword());
-    httpSession.setAttribute("user", user);
+    User loggedinUser = loginService.login(user.getEmail(), user.getPassword());
+    httpSession.setAttribute("user", loggedinUser);
     return "wishlist_overview";
   }
 
@@ -104,6 +104,7 @@ private Services services;
 
   @GetMapping("/wishlist")
   public String visWishlists(){
+
     return "wishlist";
   }
 
@@ -115,8 +116,9 @@ private Services services;
   }
 
   @GetMapping("/showWishlist")
-  public String vislists(Model model){
-    model.addAttribute("wishlist", services.loadAllLists());
+  public String vislists(Model model, HttpSession httpSession){
+    User user = (User)httpSession.getAttribute("user");
+    model.addAttribute("wishlist", services.loadAllLists(user.getId()));
     System.out.println("test");
     return "wishlist";
   }
@@ -128,8 +130,11 @@ private Services services;
 
   @PostMapping("/saveWishlist")
 
-  public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist) throws LoginSampleException{
-    services.loadWishlist(wishlist);
+  public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist, HttpSession httpSession) throws LoginSampleException{
+    User user = (User)httpSession.getAttribute("user");
+    System.out.println(user.getId());
+    services.loadWishlist(wishlist, user);
+
     return "wishlist_overview";
   }
 

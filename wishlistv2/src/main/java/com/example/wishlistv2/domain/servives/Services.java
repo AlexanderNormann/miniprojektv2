@@ -1,12 +1,18 @@
 package com.example.wishlistv2.domain.servives;
 
 import com.example.wishlistv2.domain.model.Products;
+import com.example.wishlistv2.domain.model.User;
 import com.example.wishlistv2.domain.model.Wishlist;
+import com.example.wishlistv2.respositories.DBManager;
 import com.example.wishlistv2.respositories.UserRepository;
 import com.example.wishlistv2.respositories.ProductImpl;
 import com.example.wishlistv2.respositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Service
@@ -40,14 +46,15 @@ public class Services implements ProductRepository {
 
 
   @Override
-  public Wishlist addToWishlist(Wishlist wishlist) throws LoginSampleException {
+  public Wishlist addToWishlist(Wishlist wishlist, User user) throws LoginSampleException {
     return null;
   }
 
-  public Wishlist loadWishlist(Wishlist wishlist) throws LoginSampleException{
-    return productimpl.addToWishlist(wishlist);
+  public Wishlist loadWishlist(Wishlist wishlist, User user) throws LoginSampleException{
+    return productimpl.addToWishlist(wishlist, user);
   }
-  public ArrayList<Wishlist> loadAllLists(){
-    return productimpl.loadAllLists();
+  public ArrayList<Wishlist> loadAllLists(int id){
+    return productimpl.loadAllLists(id);
   }
+
 }

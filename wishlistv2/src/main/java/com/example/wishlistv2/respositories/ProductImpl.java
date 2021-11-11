@@ -1,10 +1,12 @@
 package com.example.wishlistv2.respositories;
 
 import com.example.wishlistv2.domain.model.Products;
+import com.example.wishlistv2.domain.model.User;
 import com.example.wishlistv2.domain.model.Wishlist;
 import com.example.wishlistv2.domain.servives.LoginSampleException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.*;
@@ -42,20 +44,26 @@ public class ProductImpl implements ProductRepository {
   }
 
   @Override
-  public Wishlist addToWishlist(Wishlist wishlist) throws LoginSampleException {
-    try {
+  public Wishlist addToWishlist(Wishlist wishlist, User user) throws LoginSampleException {
+    try{
       Connection connection = DBManager.getConnection();
-      String SQL = "insert into list(name, description) values (?,?)";
-      PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+      String SQL = "insert into list(listname, listdescription, userID_FK) values (?,?,?)";
+      PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       preparedStatement.setString(1, wishlist.getName());
       preparedStatement.setString(2, wishlist.getDescription());
-      preparedStatement.executeUpdate();
-      ResultSet resultSet = preparedStatement.getGeneratedKeys();
+      preparedStatement.setInt(3, user.getId());
+
+      preparedStatement.execute();
+      /*ResultSet resultSet = preparedStatement.getResultSet();
       resultSet.next();
       int id = resultSet.getInt(1);
       wishlist.setId(id);
+
+
       return wishlist;
 
+       */
+      return null;
     } catch (SQLException er) {
       throw new LoginSampleException(er.getMessage());
     }
@@ -89,18 +97,19 @@ public class ProductImpl implements ProductRepository {
     return vareliste;
 
   }
-  public ArrayList<Wishlist> loadAllLists(){
+  public ArrayList<Wishlist> loadAllLists(int id){
     ArrayList<Wishlist> listofwishes = new ArrayList<>();
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select * from wishlist.list";
+      String SQL = "select * from wishlist.list" + " where userID_FK = ? ";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+      preparedStatement.setInt(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()){
         Wishlist wishlist = new Wishlist();
-        wishlist.setName(resultSet.getString("name"));
-        wishlist.setDescription(resultSet.getString("description"));
+        wishlist.setName(resultSet.getString("listname"));
+        wishlist.setDescription(resultSet.getString("listdescription"));
         listofwishes.add(wishlist);
       }
 
