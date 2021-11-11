@@ -1,44 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Ønskesiden</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
-    <h1>Opret Ønskeliste</h1>
-    <hr>
-    <h2>Indtast Ønske</h2>
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+        <head>
+            <meta charset="UTF-8">
+                <title>Ønskesiden</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        </head>
 
-    <form action="#" th:action="@{/saveProduct}" th:object="${Product}"
-          method="POST">
+        <body>
 
-        <input type="text" th:field="*{name}"
-               placeholder="Navn" class="form-control mb-4 col-4">
+            <div class="container">
+                <h1>Add wish's</h1>
+                <hr>
 
-        <input type="text" th:field="*{size}"
-               placeholder="Størrelse" class="form-control mb-4 col-4">
+                    <form action="#" th:action="@{/saveProduct}" th:object="${Product}"
+                          method="POST">
 
-        <input type="text" th:field="*{description}"
-               placeholder="Beskrivelse" class="form-control mb-4 col-4">
+                            <input type="text" th:field="*{name}" placeholder="Wish" class="form-control mb-4 col-4"> <!-- Name of product -->
+                            <input type="text" th:field="*{size}" placeholder="Size" class="form-control mb-4 col-4"> <!-- Name of product size -->
+                            <input type="text" th:field="*{description}" placeholder="Description" class="form-control mb-4 col-4"> <!-- Product description -->
+                            <input type="text" th:field="*{color}" placeholder="Color" class="form-control mb-4 col-4"> <!-- Product color -->
+                            <input type="text" th:field="*{price}" placeholder="Price" class="form-control mb-4 col-4"> <!-- Product size -->
+                            <input type="text" th:field="*{URL}" placeholder="Weblink" class="form-control mb-4 col-4"> <!-- Product link -->
 
-        <input type="text" th:field="*{color}"
-               placeholder="Farve" class="form-control mb-4 col-4">
+                        <button type="submit" class="btn btn-outline-danger btn-lg mb-3"> Add wish</button>
 
-        <input type="text" th:field="*{price}"
-               placeholder="Pris" class="form-control mb-4 col-4">
+                    </form>
 
-        <input type="text" th:field="*{URL}"
-               placeholder="URL" class="form-control mb-4 col-4">
+                <a th:href="@{/overview}"> Return to WishWorld</a>
 
-        <button type="submit" class="btn btn-info col-2"> Gem Ønske </button>
-
-    </form>
-
-    <a th:href="@{/overview}"> Back to menu page</a>
-
-</div>
-</body>
-</html>
+            </div>
+        </body>
+    </html>

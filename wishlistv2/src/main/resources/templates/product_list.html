@@ -1,41 +1,38 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+            <meta charset="UTF-8">
+                <title>Vare liste</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+                        <link rel="stylesheet" type="text/css" href="css.css">
+        </head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Vare liste</title>
-    <link rel="stylesheet" type="text/css" href="../css.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
+        <body>
+            <div class="container">
+                <h1 class="center">Your wishes</h1>
+                <table class="table table-light table-striped">
+                    <thead>
+                        <tr>
+                            <th> Product Name</th>
+                            <th> Product Size</th>
+                            <th> Description</th>
+                            <th> Color</th>
+                            <th> Price</th>
+                            <th> Website</th>
+                        </tr>
 
-<body>
+                        <tr th:each="Products : ${productlist}">
+                            <td th:text="${Products.name}"></td>
+                            <td th:text="${Products.size}"></td>
+                            <td th:text="${Products.description}"></td>
+                            <td th:text="${Products.color}"></td>
+                            <td th:text="${Products.price}"></td>
+                            <td> <a th:href="${Products.URL}">Click for product site</a> </td>
 
-<h1>Your wishes</h1>
-<table border="1" class="table table-striped table-responsive-md">
-    <thead>
-        <tr>
-            <th> Product Name</th>
-            <th> Product Size</th>
-            <th> Description</th>
-            <th> Color</th>
-            <th> Price</th>
-            <th> Website</th>
-        </tr>
-
-        <tr th:each="Products : ${productlist}">
-            <td th:text="${Products.name}"></td>
-            <td th:text="${Products.size}"></td>
-            <td th:text="${Products.description}"></td>
-            <td th:text="${Products.color}"></td>
-            <td th:text="${Products.price}"></td>
-            <td><a th:href="${Products.URL}">Click for product site</a></td>
-
-
-        </tr>
-    </thead>
-</table>
-    <a th:href="@{/overview}">Back to menu page </a>
-
-</body>
-</html>
+                        </tr>
+                    </thead>
+                </table>
+                <a th:href="@{/overview}">Return to WishWorld</a>
+            </div>
+        </body>
+    </html>
