@@ -59,10 +59,10 @@ private Services services;
   }
 
   @PostMapping("/saveProduct")
-  public String gemVare(@ModelAttribute("Product") Products products) throws LoginSampleException {
-    //services.opretVare(vare.getNavn(), vare.getStørrelse(), vare.getBeskrivelse(), vare.getFarve(), vare.getPris(), vare.getURL());
-    services.saveProduct(products);
-    System.out.println("HEJ");
+  public String gemVare(@ModelAttribute("Product") Products products, HttpSession httpSession) throws LoginSampleException {
+    User user = (User)httpSession.getAttribute("user");
+    System.out.println(user.getId());
+    services.saveProduct(products, user);
     return "wishlist_overview";
   }
 
@@ -97,8 +97,9 @@ private Services services;
 
 
   @GetMapping("/showProducts")
-  public String visliste (Model model){
-    model.addAttribute("productlist", services.loadProducts());
+  public String visliste (Model model, HttpSession httpSession){
+    User user = (User)httpSession.getAttribute("user");
+    model.addAttribute("productlist", services.loadProducts(user.getId()));
     return "product_list";
   }
 

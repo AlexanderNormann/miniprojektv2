@@ -19,10 +19,10 @@ public class ProductImpl implements ProductRepository {
   }
 
   @Override
-  public Products addProduct(Products products) throws LoginSampleException {
+  public Products addProduct(Products products, User user) throws LoginSampleException {
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "insert into Product (productname, productsize, description, color, price, URL) values (?, ?, ?, ?, ?, ?)";
+      String SQL = "insert into Product (productname, productsize, productdescription, color, price, URL, userID_FK) values (?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, products.getName());
       preparedStatement.setString(2, products.getSize());
@@ -30,7 +30,8 @@ public class ProductImpl implements ProductRepository {
       preparedStatement.setString(4, products.getColor());
       preparedStatement.setInt(5, products.getPrice());
       preparedStatement.setString(6, products.getURL());
-      preparedStatement.executeUpdate();
+      preparedStatement.setInt(7, user.getId());
+      preparedStatement.execute();
       ResultSet resultSet = preparedStatement.getGeneratedKeys();
       resultSet.next();
       int id = resultSet.getInt(1);
@@ -70,20 +71,21 @@ public class ProductImpl implements ProductRepository {
   }
 
 
-  public ArrayList<Products> loadList(){
+  public ArrayList<Products> loadProductList(int id){
     ArrayList<Products> vareliste = new ArrayList<>();
 
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select * from wishlist.product";
+      String SQL = "select * from wishlist.product " + "where userID_FK = ?";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+      preparedStatement.setInt(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()){
         Products products = new Products();
         products.setName(resultSet.getString("productname"));
         products.setSize(resultSet.getString("productsize"));
-        products.setDescription(resultSet.getString("description"));
+        products.setDescription(resultSet.getString("productdescription"));
         products.setColor(resultSet.getString("color"));
         products.setURL(resultSet.getString("url"));
         products.setPrice((Integer.parseInt(resultSet.getString("price"))));

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository {
- Products addProduct(Products products) throws LoginSampleException;
+ Products addProduct(Products products, User user) throws LoginSampleException;
 
  Wishlist addToWishlist(Wishlist wishlist, User user) throws LoginSampleException;
 
