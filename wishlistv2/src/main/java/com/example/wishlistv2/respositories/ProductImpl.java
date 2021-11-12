@@ -3,7 +3,6 @@ package com.example.wishlistv2.respositories;
 import com.example.wishlistv2.domain.model.Products;
 import com.example.wishlistv2.domain.model.User;
 import com.example.wishlistv2.domain.model.Wishlist;
-import com.example.wishlistv2.domain.servives.LoginSampleExeption;
 import com.example.wishlistv2.domain.servives.ProductSampleExeption;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,15 +54,6 @@ public class ProductImpl implements ProductRepository {
       preparedStatement.setInt(3, user.getId());
 
       preparedStatement.execute();
-      /*ResultSet resultSet = preparedStatement.getResultSet();
-      resultSet.next();
-      int id = resultSet.getInt(1);
-      wishlist.setId(id);
-
-
-      return wishlist;
-
-       */
       return null;
     } catch (SQLException er) {
       throw new ProductSampleExeption(er.getMessage());
