@@ -27,7 +27,7 @@ public class ProductImpl implements ProductRepository {
       preparedStatement.setString(2, products.getSize());
       preparedStatement.setString(3, products.getDescription());
       preparedStatement.setString(4, products.getColor());
-      preparedStatement.setInt(5, products.getPrice());
+      preparedStatement.setString(5, products.getPrice());
       preparedStatement.setString(6, products.getURL());
       preparedStatement.setInt(7, user.getId());
       preparedStatement.execute();
@@ -63,7 +63,6 @@ public class ProductImpl implements ProductRepository {
 
   public ArrayList<Products> loadProductList(int id){
     ArrayList<Products> vareliste = new ArrayList<>();
-
     try {
       Connection connection = DBManager.getConnection();
       String SQL = "select * from wishlist.product " + "where userID_FK = ?";
@@ -78,7 +77,8 @@ public class ProductImpl implements ProductRepository {
         products.setDescription(resultSet.getString("productdescription"));
         products.setColor(resultSet.getString("color"));
         products.setURL(resultSet.getString("url"));
-        products.setPrice((Integer.parseInt(resultSet.getString("price"))));
+        products.setId(resultSet.getInt(("productID")));
+        products.setPrice((resultSet.getString("price")));
         vareliste.add(products);
       }
 
@@ -87,6 +87,19 @@ public class ProductImpl implements ProductRepository {
       throwables.printStackTrace();
     }
     return vareliste;
+
+  }
+
+  public void deleteProduct(int id){
+   try{
+    Connection connection = DBManager.getConnection();
+    String SQL = "delete from wishlist.product where productID = ?";
+    PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+    preparedStatement.setInt(1, id);
+    preparedStatement.execute();
+   } catch(SQLException er){
+     er.getMessage();
+   }
 
   }
   public ArrayList<Wishlist> loadAllLists(int id){

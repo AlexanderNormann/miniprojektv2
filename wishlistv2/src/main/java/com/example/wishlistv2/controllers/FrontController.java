@@ -9,10 +9,12 @@ import com.example.wishlistv2.domain.servives.LoginService;
 import com.example.wishlistv2.domain.servives.ProductSampleExeption;
 import com.example.wishlistv2.domain.servives.Services;
 
+import com.example.wishlistv2.respositories.ProductImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -60,9 +62,8 @@ private Services services;
   @PostMapping("/saveProduct")
   public String gemVare(@ModelAttribute("Product") Products products, HttpSession httpSession) throws ProductSampleExeption {
     User user = (User)httpSession.getAttribute("user");
-    System.out.println(user.getId());
     services.saveProduct(products, user);
-    return "wishlist_overview";
+    return "redirect:/showProducts";
   }
 
   @GetMapping("/addProduct")
@@ -97,6 +98,12 @@ private Services services;
     return "product_list";
   }
 
+  @GetMapping("/deleteProduct/{id}")
+  public String deleteProduct(@PathVariable("id") int id){
+    services.deleteProduct(id);
+    return "redirect:/showProducts";
+  }
+
   @GetMapping("/wishlist")
   public String visWishlists(){
 
@@ -114,7 +121,6 @@ private Services services;
   public String vislists(Model model, HttpSession httpSession){
     User user = (User)httpSession.getAttribute("user");
     model.addAttribute("wishlist", services.loadAllLists(user.getId()));
-    System.out.println("test");
     return "wishlist";
   }
 
@@ -127,7 +133,6 @@ private Services services;
 
   public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist, HttpSession httpSession) throws ProductSampleExeption {
     User user = (User)httpSession.getAttribute("user");
-    System.out.println(user.getId());
     services.loadWishlist(wishlist, user);
 
     return "wishlist_overview";

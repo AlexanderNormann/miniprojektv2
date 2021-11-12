@@ -10,6 +10,7 @@
         <body>
             <div class="container">
                 <h1 class="center">Your wishes</h1>
+               <!-- <form action="#" th:action="@{/deleteProduct}"></form>-->
                 <table class="table table-danger table-striped">
                     <thead>
                         <tr>
@@ -19,6 +20,7 @@
                             <th class="table-danger"> Color</th>
                             <th class="table-danger"> Price</th>
                             <th class="table-danger"> Website</th>
+                            <th class="table-danger"> Delete wish</th>
                         </tr>
 
                         <tr th:each="Products : ${productlist}">
@@ -28,11 +30,13 @@
                             <td th:text="${Products.color}" class="table-danger"></td>
                             <td th:text="${Products.price}" class="table-danger"></td>
                             <td> <a th:href="${Products.URL}" class="table-danger">Click for product site</a> </td>
+                            <td><a th:href="@{'/deleteProduct/'+${Products.id}}" class="btn btn-outline-danger" >Delete</a></td>
 
                         </tr>
                     </thead>
                 </table>
-                <a th:href="@{/overview}">Return to WishWorld</a>
+                <a th:href="@{/addProduct}" class="btn btn-danger btn-xl mb-3"> Add wishes</a> <!-- Add product -->
+                <a th:href="@{/overview}" class="btn btn-danger btn-sm mb-3">Return to WishWorld</a>
             </div>
         </body>
     </html>

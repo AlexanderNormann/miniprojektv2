@@ -42,4 +42,10 @@ public class Services implements ProductRepository {
   public ArrayList<Wishlist> loadAllLists(int id){
     return productimpl.loadAllLists(id);
   }
+
+  public void deleteProduct(int id){
+    productimpl.deleteProduct(id);
+  }
 }
+
+

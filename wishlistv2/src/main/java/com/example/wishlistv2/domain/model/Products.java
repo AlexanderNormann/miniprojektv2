@@ -6,7 +6,7 @@ public class Products {
   private String size;
   private String description;
   private String color;
-  private int price;
+  private String price;
   private String URL;
   private int id;
 
@@ -50,11 +50,11 @@ public class Products {
     this.id = id;
   }
 
-  public int getPrice() {
+  public String getPrice() {
     return price;
   }
 
-  public void setPrice(int price) {
+  public void setPrice(String price) {
     this.price = price;
   }
 
@@ -66,7 +66,7 @@ public class Products {
     this.URL = URL;
   }
 
-  public Products(String name, String size, String description, String color, int id, int price) {
+  public Products(String name, String size, String description, String color, int id, String price) {
     this.name = name;
     this.size = size;
     this.description = description;
@@ -75,7 +75,7 @@ public class Products {
     this.id = id;
   }
 
-  public Products(String name, String size, String description, String color, int price, String URL) {
+  public Products(String name, String size, String description, String color, String price, String URL) {
     this.name = name;
     this.size = size;
     this.description = description;
