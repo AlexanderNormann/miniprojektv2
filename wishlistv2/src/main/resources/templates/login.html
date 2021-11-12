@@ -14,8 +14,8 @@
 
             <form action="#" th:action="@{/loginBruger}" th:object="${User}" method="POST">
 
-                <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4"> <!-- Email -->
-                <input type="password" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4"> <!-- Password -->
+                <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4" required> <!-- Email -->
+                <input type="password" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4" required> <!-- Password -->
 
                 <button type="submit" class="btn btn-outline-danger btn-lg mb-3"> Login </button>
 

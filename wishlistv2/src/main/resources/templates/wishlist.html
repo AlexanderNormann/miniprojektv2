@@ -9,15 +9,20 @@
         <body>
             <div class="container">
                 <h1>Wishlist colection</h1>
+                    <table class="table table-striped-light">
+                        <thead>
+                            <tr>
+                                <th>Wishlist name</th>
+                                <th>Wishlist Description</th>
+                            </tr>
 
-
-                <tr th:each="Wishlist : ${wishlist}">
-                        <td th:text="${Wishlist.name}"></td>
-                        <td th:text="${Wishlist.description}"></td>
-
-                    <a th:href="@{/overview}">Return to WishWorld</a>
-
-                </tr>
+                            <tr th:each="Wishlist : ${wishlist}">
+                                <td th:text="${Wishlist.name}"></td>
+                                <td th:text="${Wishlist.description}"></td>
+                            </tr>
+                        </thead>
+                    </table>
+                <a th:href="@{/overview}">Return to WishWorld</a>
             </div>
         </body>
     </html>

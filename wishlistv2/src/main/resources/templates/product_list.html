@@ -10,24 +10,24 @@
         <body>
             <div class="container">
                 <h1 class="center">Your wishes</h1>
-                <table class="table table-light table-striped">
+                <table class="table table-danger table-striped">
                     <thead>
                         <tr>
-                            <th> Product Name</th>
-                            <th> Product Size</th>
-                            <th> Description</th>
-                            <th> Color</th>
-                            <th> Price</th>
-                            <th> Website</th>
+                            <th class="table-danger"> Product Name</th>
+                            <th class="table-danger"> Product Size</th>
+                            <th class="table-danger"> Description</th>
+                            <th class="table-danger"> Color</th>
+                            <th class="table-danger"> Price</th>
+                            <th class="table-danger"> Website</th>
                         </tr>
 
                         <tr th:each="Products : ${productlist}">
-                            <td th:text="${Products.name}"></td>
-                            <td th:text="${Products.size}"></td>
-                            <td th:text="${Products.description}"></td>
-                            <td th:text="${Products.color}"></td>
-                            <td th:text="${Products.price}"></td>
-                            <td> <a th:href="${Products.URL}">Click for product site</a> </td>
+                            <td th:text="${Products.name}" class="table-danger"></td>
+                            <td th:text="${Products.size}" class="table-danger"></td>
+                            <td th:text="${Products.description}" class="table-danger"></td>
+                            <td th:text="${Products.color}" class="table-danger"></td>
+                            <td th:text="${Products.price}" class="table-danger"></td>
+                            <td> <a th:href="${Products.URL}" class="table-danger">Click for product site</a> </td>
 
                         </tr>
                     </thead>
