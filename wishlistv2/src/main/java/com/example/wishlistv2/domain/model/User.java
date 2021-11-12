@@ -1,5 +1,7 @@
 package com.example.wishlistv2.domain.model;
 
+import java.util.Locale;
+
 public class User {
   private String firstname;
   private String lastname;
@@ -12,7 +14,6 @@ public class User {
     this.lastname = lastname;
     this.email = email;
     this.password = password;
-    //this.id = id;
   }
 
   public User(String email, String password) {

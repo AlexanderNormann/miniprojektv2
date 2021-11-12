@@ -27,12 +27,12 @@ public class Services implements ProductRepository {
 
    */
 
-  public Products saveProduct(Products products, User user) throws LoginSampleException {
+  public Products saveProduct(Products products, User user) throws ProductSampleExeption {
     return productimpl.addProduct(products, user);
   }
 
   @Override
-  public Products addProduct(Products products, User user) throws LoginSampleException {
+  public Products addProduct(Products products, User user) throws ProductSampleExeption{
     return null;
   }
 
@@ -43,11 +43,11 @@ public class Services implements ProductRepository {
 
 
   @Override
-  public Wishlist addToWishlist(Wishlist wishlist, User user) throws LoginSampleException {
+  public Wishlist addToWishlist(Wishlist wishlist, User user) throws ProductSampleExeption {
     return null;
   }
 
-  public Wishlist loadWishlist(Wishlist wishlist, User user) throws LoginSampleException{
+  public Wishlist loadWishlist(Wishlist wishlist, User user) throws ProductSampleExeption {
     return productimpl.addToWishlist(wishlist, user);
   }
   public ArrayList<Wishlist> loadAllLists(int id){

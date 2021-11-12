@@ -2,18 +2,16 @@ package com.example.wishlistv2.respositories;
 
 
 import com.example.wishlistv2.domain.model.User;
-import com.example.wishlistv2.domain.servives.LoginSampleException;
+import com.example.wishlistv2.domain.servives.LoginSampleExeption;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
   @Override
-  public User login(String email, String password) throws LoginSampleException {
+  public User login(String email, String password) throws LoginSampleExeption {
     try {
       Connection connection = DBManager.getConnection();
       String SQL = "select userid from users " +  "where email = ? and password = ?";
@@ -27,17 +25,17 @@ public class UserRepositoryImpl implements UserRepository {
         user.setId(id);
         return user;
       } else {
-        throw new LoginSampleException("kunne ikke ikke login");
+        throw new LoginSampleExeption("kunne ikke ikke login");
       }
 
     } catch (SQLException ex) {
-      throw new LoginSampleException(ex.getMessage());
+      throw new LoginSampleExeption(ex.getMessage());
     }
 
   }
 
   @Override
-  public User createUser(User user) throws LoginSampleException {
+  public User createUser(User user) throws LoginSampleExeption {
     try {
       Connection connection = DBManager.getConnection();
       String SQL = "insert into Users (firstname, lastname, email, password) values (?, ?, ?, ?) ";
@@ -54,31 +52,8 @@ public class UserRepositoryImpl implements UserRepository {
       return user;
 
     } catch (SQLException er) {
-      throw new LoginSampleException(er.getMessage());
+      throw new LoginSampleExeption(er.getMessage());
     }
 
   }
-
-/*
-  @Override
-  public void gem(Bruger bruger) {
-    listeAfBruger.add(bruger);
-
-  }
-/*
-  @Override
-  public Bruger opret1(Bruger bruger) {
-
-this.brugerRepository.opret1(bruger);
-
-    return bruger;
-  }
-  /*
-
-  @Override
-  public Bruger opretBruger1(Bruger bruger) throws LoginSampleException {
-    return bruger;
-  }
-
-*/
 }

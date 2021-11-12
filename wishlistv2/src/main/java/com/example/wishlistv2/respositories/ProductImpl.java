@@ -3,10 +3,10 @@ package com.example.wishlistv2.respositories;
 import com.example.wishlistv2.domain.model.Products;
 import com.example.wishlistv2.domain.model.User;
 import com.example.wishlistv2.domain.model.Wishlist;
-import com.example.wishlistv2.domain.servives.LoginSampleException;
+import com.example.wishlistv2.domain.servives.LoginSampleExeption;
+import com.example.wishlistv2.domain.servives.ProductSampleExeption;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.*;
@@ -19,7 +19,7 @@ public class ProductImpl implements ProductRepository {
   }
 
   @Override
-  public Products addProduct(Products products, User user) throws LoginSampleException {
+  public Products addProduct(Products products, User user) throws ProductSampleExeption {
     try {
       Connection connection = DBManager.getConnection();
       String SQL = "insert into Product (productname, productsize, productdescription, color, price, URL, userID_FK) values (?, ?, ?, ?, ?, ?, ?)";
@@ -39,13 +39,13 @@ public class ProductImpl implements ProductRepository {
       return products;
 
     } catch (SQLException er) {
-      throw new LoginSampleException(er.getMessage());
+      throw new ProductSampleExeption(er.getMessage());
     }
 
   }
 
   @Override
-  public Wishlist addToWishlist(Wishlist wishlist, User user) throws LoginSampleException {
+  public Wishlist addToWishlist(Wishlist wishlist, User user) throws ProductSampleExeption {
     try{
       Connection connection = DBManager.getConnection();
       String SQL = "insert into list(listname, listdescription, userID_FK) values (?,?,?)";
@@ -66,7 +66,7 @@ public class ProductImpl implements ProductRepository {
        */
       return null;
     } catch (SQLException er) {
-      throw new LoginSampleException(er.getMessage());
+      throw new ProductSampleExeption(er.getMessage());
     }
   }
 

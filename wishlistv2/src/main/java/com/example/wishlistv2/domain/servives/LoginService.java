@@ -16,12 +16,12 @@ public class LoginService {
 
   }
 
-  public User login(String email, String password) throws LoginSampleException{
+  public User login(String email, String password) throws LoginSampleExeption {
 
     return userRepository.login(email, password);
   }
   
-  public User createUser(String firstname, String lastname, String email, String password) throws LoginSampleException{
+  public User createUser(String firstname, String lastname, String email, String password) throws LoginSampleExeption {
     User user = new User(firstname, lastname, email, password);
 
     return userRepository.createUser(user);

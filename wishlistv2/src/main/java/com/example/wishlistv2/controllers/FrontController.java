@@ -4,8 +4,9 @@ package com.example.wishlistv2.controllers;
 import com.example.wishlistv2.domain.model.User;
 import com.example.wishlistv2.domain.model.Products;
 import com.example.wishlistv2.domain.model.Wishlist;
-import com.example.wishlistv2.domain.servives.LoginSampleException;
+import com.example.wishlistv2.domain.servives.LoginSampleExeption;
 import com.example.wishlistv2.domain.servives.LoginService;
+import com.example.wishlistv2.domain.servives.ProductSampleExeption;
 import com.example.wishlistv2.domain.servives.Services;
 
 import org.springframework.stereotype.Controller;
@@ -33,16 +34,14 @@ private Services services;
 
 
   @PostMapping("/saveUser")
-  public String saveUser(@ModelAttribute("User") User user) throws LoginSampleException {
-    //System.out.println(bruger.getEfternavn());
+  public String saveUser(@ModelAttribute("User") User user) throws LoginSampleExeption {
     loginService.createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
-    //loginService.gem(bruger);
     return "redirect:/";
   }
 
 
   @PostMapping("/loginBruger")
-  public String loginBruger(@ModelAttribute ("User") User user, HttpSession httpSession) throws LoginSampleException{
+  public String loginBruger(@ModelAttribute ("User") User user, HttpSession httpSession) throws LoginSampleExeption {
     User loggedinUser = loginService.login(user.getEmail(), user.getPassword());
     httpSession.setAttribute("user", loggedinUser);
     return "wishlist_overview";
@@ -59,7 +58,7 @@ private Services services;
   }
 
   @PostMapping("/saveProduct")
-  public String gemVare(@ModelAttribute("Product") Products products, HttpSession httpSession) throws LoginSampleException {
+  public String gemVare(@ModelAttribute("Product") Products products, HttpSession httpSession) throws ProductSampleExeption {
     User user = (User)httpSession.getAttribute("user");
     System.out.println(user.getId());
     services.saveProduct(products, user);
@@ -74,20 +73,15 @@ private Services services;
     }
 
   @GetMapping("/create")
-  public String create(@ModelAttribute ("User") User user) throws LoginSampleException {
-    //System.out.println(bruger.getEfternavn());
-    //loginService.opretBruger("x", "x", "5", "x");
+  public String create(@ModelAttribute ("User") User user) throws LoginSampleExeption {
     return "create_user";
   }
 
   @GetMapping("/login")
-  public String login(@ModelAttribute("User") User user, HttpSession hs) throws LoginSampleException{
+  public String login(@ModelAttribute("User") User user, HttpSession hs) throws LoginSampleExeption {
     hs.setAttribute("user", user);
     return "login";
   }
-
-
-
 
   @GetMapping ("/addwish")
   public String wishsite(){
@@ -131,7 +125,7 @@ private Services services;
 
   @PostMapping("/saveWishlist")
 
-  public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist, HttpSession httpSession) throws LoginSampleException{
+  public String gemWishlist(@ModelAttribute("Wishlist") Wishlist wishlist, HttpSession httpSession) throws ProductSampleExeption {
     User user = (User)httpSession.getAttribute("user");
     System.out.println(user.getId());
     services.loadWishlist(wishlist, user);
