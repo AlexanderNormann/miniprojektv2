@@ -1,0 +1,18 @@
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+        <head>
+            <meta charset="UTF-8">
+                <title>Wish List</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+                        <link rel="stylesheet" type="text/css" href="css.css">
+
+        </head>
+
+        <body>
+            <div class="container">
+                <h1 class="center"> Welcome to WishWorld</h1>
+                            <a th:href= "@{/create}" class="btn btn-outline-danger btn-lg mb-3"> Create profile</a>
+                            <a th:href= "@{/login}" class="btn btn-outline-danger btn-lg mb-3"> Login </a>
+            </div>
+        </body>
+    </html>
