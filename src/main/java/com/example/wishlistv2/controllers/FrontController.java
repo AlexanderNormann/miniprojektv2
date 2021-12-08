@@ -34,7 +34,7 @@ private Services services;
 
 
 
-  @PostMapping("saveUser")
+  @PostMapping("/saveUser")
   public String saveUser(@ModelAttribute("User") User user) throws LoginSampleExeption {
     loginService.createUser(user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword());
     return "redirect:/";
