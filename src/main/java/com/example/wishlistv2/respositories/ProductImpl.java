@@ -65,7 +65,7 @@ public class ProductImpl implements ProductRepository {
     ArrayList<Products> vareliste = new ArrayList<>();
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select * from wishlist.product " + "where userID_FK = ?";
+      String SQL = "select * from heroku_5ba73a1ff072f03.product " + "where userID_FK = ?";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       preparedStatement.setInt(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
@@ -93,7 +93,7 @@ public class ProductImpl implements ProductRepository {
   public void deleteProduct(int id){
    try{
     Connection connection = DBManager.getConnection();
-    String SQL = "delete from wishlist.product where productID = ?";
+    String SQL = "delete from heroku_5ba73a1ff072f03.product where productID = ?";
     PreparedStatement preparedStatement = connection.prepareStatement(SQL);
     preparedStatement.setInt(1, id);
     preparedStatement.execute();
@@ -106,7 +106,7 @@ public class ProductImpl implements ProductRepository {
     ArrayList<Wishlist> listofwishes = new ArrayList<>();
     try {
       Connection connection = DBManager.getConnection();
-      String SQL = "select * from wishlist.list" + " where userID_FK = ? ";
+      String SQL = "select * from heroku_5ba73a1ff072f03.list" + " where userID_FK = ? ";
       PreparedStatement preparedStatement = connection.prepareStatement(SQL);
       preparedStatement.setInt(1, id);
       ResultSet resultSet = preparedStatement.executeQuery();
